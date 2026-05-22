@@ -1,0 +1,42 @@
+import React from 'react';
+
+function Section({ changePage, currentPage }) {
+  const menuItems = [
+    { id: 'new', name: '📰 Новости' },
+    { id: 'about', name: '👤 О магазине' },
+    { id: 'feedback', name: '📞 Обратная связь' },
+    { id: 'catalog', name: '🧸 Каталог товаров' },
+    { id: 'cart', name: '🛒 Корзина' }
+  ];
+
+  return (
+    <div className="section">
+      {/* МЕНЮ САЙТА */}
+      <div className="nav-menu">
+        <h3>Главное меню</h3>
+        <ul>
+          {menuItems.map(item => (
+            <li key={item.id}>
+              <button 
+                onClick={() => changePage(item.id)}
+                className={currentPage === item.id ? 'active' : ''}
+              >
+                {item.name}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* БАННЕРЫ ВНИЗУ SECTION */}
+      <div className="banners">
+        <h4>🎁 Акции</h4>
+        <div className="banner">Скидка 20% на первый заказ</div>
+        <div className="banner">Бесплатная доставка от 1500₽</div>
+        <div className="banner">Подарок при заказе от 2000₽</div>
+      </div>
+    </div>
+  );
+}
+
+export default Section;
