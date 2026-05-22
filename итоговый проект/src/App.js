@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Catalog from './pages/Catalog';
 import Cart from './pages/Cart';
-import Contacts from './pages/Contacts';
+import Contacts from './pages/FeedBack';
 import About from './pages/About';
+import New from './pages/New';
+import FeedBack from './pages/FeedBack'
+
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -93,8 +96,9 @@ function App() {
           <div style={logoStyle}>🌸 Весеннее настроение</div>
           <nav style={navStyle}>
             <Link to="/" style={linkStyle}>Каталог</Link>
+            <Link to="/new" style={linkStyle}>Новости</Link>
             <Link to="/about" style={linkStyle}>О нас</Link>
-            <Link to="/contacts" style={linkStyle}>Контакты</Link>
+            <Link to="/feedback" style={linkStyle}>Обратная связь</Link>
             <Link to="/cart" style={cartLinkStyle}>🛒 Корзина ({cart.length})</Link>
           </nav>
         </header>
@@ -109,8 +113,9 @@ function App() {
                 clearCart={clearCart} 
               />
             } />
-            <Route path="/contacts" element={<Contacts />} />
+            <Route path="/feedback" element={<FeedBack />} />
             <Route path="/about" element={<About />} />
+            <Route path="/new" element={<New />} />
           </Routes>
         </main>
 
