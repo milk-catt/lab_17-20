@@ -72,8 +72,8 @@ function App() {
 
       {/* FOOTER */}
       <footer className="footer">
-        <p>📞 +7 (908) 517-50-43 | 📧 info@softworld.ru</p>
-        <p>📍 г. Москва, ул. Игрушечная, д. 15</p>
+        <p>📞 8-(800)-555-35-35 | 📧 chekrizova@sfedu.ru, aleolei@sfedu.ru</p>
+        <p>📍 Яблоновский, ул. Гагарина, 114.</p>
         <p>© 2026 Все права защищены</p>
       </footer>
     </div>

@@ -15,7 +15,8 @@ function FeedBack() {
       
       <div style={{ marginBottom: 20 }}>
         <p>📱 Телефон: <strong>8-(800)-555-35-35 - Проще позвонить чем у кого-то занимать!😘</strong></p>
-        <p>💬 Telegram: <strong>FFFFFFFFFFF</strong></p>
+        <p>💬 Telegram: <strong><a href="https://t.me/saitostroeniethisidisgusting">https://t.me/saitostroeniethisidisgusting</a></strong></p>
+        <p>💬 ВКонтакте: <strong><a href="https://vk.me/join/q_xeuvYt3EAAjQB5yPUr154ddd7VtPbfZno=">заходите в общий чатик</a></strong></p>
         <p>📧 Email: <strong>chekrizova@sfedu.ru, aleolei@sfedu.ru</strong></p>
       </div>
 
