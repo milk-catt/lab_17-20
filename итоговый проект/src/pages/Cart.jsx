@@ -1,8 +1,36 @@
 // src/pages/Cart.jsx
-import React from 'react';
+import React, { useState } from 'react';
 
-function Cart({ cartItems, removeFromCart, clearCart }) {
+function Cart({ cartItems, removeFromCart, clearCart, clearCartSilently }) {
+  const [showPhoneModal, setShowPhoneModal] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [orderPlaced, setOrderPlaced] = useState(false);
+
   const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
+
+  const handleCheckout = () => {
+    if (cartItems.length === 0) {
+      alert('Корзина пуста! Добавьте товары для оформления заказа.');
+      return;
+    }
+    setShowPhoneModal(true);
+  };
+
+  const confirmOrder = () => {
+  if (!phoneNumber || phoneNumber.length < 10) {
+    alert('Пожалуйста, укажите корректный номер телефона');
+    return;
+  }
+  
+  setShowPhoneModal(false);
+  clearCartSilently();  // ← ТЕПЕРЬ БЕЗ ПОДТВЕРЖДЕНИЯ
+  setOrderPlaced(true);
+  
+};
+  const backToCart = () => {
+    setOrderPlaced(false);
+    setPhoneNumber('');
+  };
 
   const containerStyle = {
     padding: '30px',
@@ -74,6 +102,116 @@ function Cart({ cartItems, removeFromCart, clearCart }) {
     color: 'white'
   };
 
+  const modalOverlayStyle = {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1000
+  };
+
+  const modalStyle = {
+    backgroundColor: 'white',
+    borderRadius: '20px',
+    padding: '30px',
+    maxWidth: '400px',
+    width: '90%',
+    textAlign: 'center',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
+  };
+
+  const modalTitleStyle = {
+    fontSize: '1.5rem',
+    color: '#e91e63',
+    marginBottom: '20px'
+  };
+
+  const inputStyle = {
+    width: '100%',
+    padding: '12px',
+    fontSize: '16px',
+    border: '2px solid #ddd',
+    borderRadius: '10px',
+    marginBottom: '20px',
+    textAlign: 'center'
+  };
+
+  const modalButtonStyle = {
+    backgroundColor: '#ff69b4',
+    color: 'white',
+    border: 'none',
+    padding: '12px 24px',
+    borderRadius: '30px',
+    cursor: 'pointer',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    width: '100%'
+  };
+
+  const cancelButtonStyle = {
+    backgroundColor: '#95a5a6',
+    color: 'white',
+    border: 'none',
+    padding: '12px 24px',
+    borderRadius: '30px',
+    cursor: 'pointer',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    width: '100%',
+    marginTop: '10px'
+  };
+
+  const thankYouStyle = {
+    textAlign: 'center',
+    padding: '50px 20px'
+  };
+
+  const thankYouTitleStyle = {
+    fontSize: '2rem',
+    color: '#e91e63',
+    marginBottom: '20px'
+  };
+
+  const thankYouTextStyle = {
+    fontSize: '1.2rem',
+    color: '#555',
+    marginBottom: '30px',
+    lineHeight: '1.6'
+  };
+
+  const backButtonStyle = {
+    backgroundColor: '#ff69b4',
+    color: 'white',
+    border: 'none',
+    padding: '12px 30px',
+    borderRadius: '30px',
+    cursor: 'pointer',
+    fontSize: '16px',
+    fontWeight: 'bold'
+  };
+
+  if (orderPlaced) {
+    return (
+      <div style={containerStyle}>
+        <div style={thankYouStyle}>
+          <div style={thankYouTitleStyle}>🌸 Спасибо за заказ!</div>
+          <div style={thankYouTextStyle}>
+            Продавец свяжется с вами для уточнения деталей по номеру:<br />
+            <strong style={{ fontSize: '1.3rem', color: '#e91e63' }}>{phoneNumber}</strong>
+          </div>
+          <button onClick={backToCart} style={backButtonStyle}>
+            🛍️ Вернуться в каталог
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (cartItems.length === 0) {
     return (
       <div style={containerStyle}>
@@ -114,10 +252,32 @@ function Cart({ cartItems, removeFromCart, clearCart }) {
         <button onClick={clearCart} style={clearButtonStyle}>
           🗑 Очистить корзину
         </button>
-        <button style={checkoutButtonStyle}>
+        <button onClick={handleCheckout} style={checkoutButtonStyle}>
           💐 Оформить заказ
         </button>
       </div>
+
+      {showPhoneModal && (
+        <div style={modalOverlayStyle} onClick={() => setShowPhoneModal(false)}>
+          <div style={modalStyle} onClick={(e) => e.stopPropagation()}>
+            <h3 style={modalTitleStyle}>📞 Укажите свой контактный телефон</h3>
+            <input
+              type="tel"
+              placeholder="+7 (XXX) XXX-XX-XX"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              style={inputStyle}
+              autoFocus
+            />
+            <button onClick={confirmOrder} style={modalButtonStyle}>
+              ✅ Подтвердить заказ
+            </button>
+            <button onClick={() => setShowPhoneModal(false)} style={cancelButtonStyle}>
+              ❌ Отмена
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -14,42 +14,38 @@ function App() {
   const [selectedTag, setSelectedTag] = useState(null);
 
   const addToCart = (product) => {
-  // Проверяем, есть ли уже товар в корзине
-  const isAlreadyInCart = cart.some(item => item.id === product.id);
-  
-  if (isAlreadyInCart) {
-    // Если товар уже в корзине - удаляем его
-    const newCart = cart.filter(item => item.id !== product.id);
-    setCart(newCart);
-    alert(`🗑️ ${product.name} удалён из корзины!`);
-  } else {
-    // Если товара нет - добавляем
-    setCart([...cart, product]);
-    alert(`🌸 ${product.name} добавлен в корзину!`);
-  }
-};
+    const isAlreadyInCart = cart.some(item => item.id === product.id);
+    
+    if (isAlreadyInCart) {
+      const newCart = cart.filter(item => item.id !== product.id);
+      setCart(newCart);
+      alert(`🗑️ ${product.name} удалён из корзины!`);
+    } else {
+      setCart([...cart, product]);
+      alert(`🌸 ${product.name} добавлен в корзину!`);
+    }
+  };
 
- // В App.jsx найдите функцию removeFromCart и замените её на эту:
-const removeFromCart = (id) => {
-  // Находим товар по id
-  const product = cart.find(item => item.id === id);
-  
-  // Показываем подтверждение
-  if (window.confirm(`❓ Вы уверены, что хотите удалить "${product?.name}" из корзины?`)) {
-    const index = cart.findIndex(item => item.id === id);
-    if (index !== -1) {
-      const newCart = [...cart];
-      newCart.splice(index, 1);
+  const removeFromCart = (id) => {
+    const product = cart.find(item => item.id === id);
+    
+    if (window.confirm(`❓ Вы уверены, что хотите удалить "${product?.name}" из корзины?`)) {
+      const newCart = cart.filter(item => item.id !== id);
       setCart(newCart);
       alert(`🗑️ ${product?.name} удалён из корзины!`);
     }
-  }
-};
+  };
 
+  // Очистка корзины С ПОДТВЕРЖДЕНИЕМ (для кнопки "Очистить корзину")
   const clearCart = () => {
     if (window.confirm('Очистить корзину?')) {
       setCart([]);
     }
+  };
+
+  // Очистка корзины БЕЗ ПОДТВЕРЖДЕНИЯ (для оформления заказа)
+  const clearCartSilently = () => {
+    setCart([]);
   };
 
   const filterByTag = (tag) => {
@@ -71,13 +67,18 @@ const removeFromCart = (id) => {
       case 'feedback':
         return <FeedBack />;
       case 'catalog':
-  return <Catalog 
-    addToCart={addToCart} 
-    selectedTag={selectedTag}
-    cartItems={cart}  // ← ДОБАВИТЬ ЭТУ СТРОКУ
-  />;
+        return <Catalog 
+          addToCart={addToCart} 
+          selectedTag={selectedTag}
+          cartItems={cart}
+        />;
       case 'cart':
-        return <Cart cartItems={cart} removeFromCart={removeFromCart} clearCart={clearCart} />;
+        return <Cart 
+          cartItems={cart} 
+          removeFromCart={removeFromCart} 
+          clearCart={clearCart}
+          clearCartSilently={clearCartSilently}
+        />;
       default:
         return <New />;
     }
