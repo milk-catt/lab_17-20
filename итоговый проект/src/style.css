@@ -101,7 +101,8 @@
 
 /* БАННЕРЫ */
 .banners, .aside-banners {
-  margin-top: auto;
+  margin-top: 20px;  
+  margin-bottom: 10px;
 }
 
 .banner, .aside-banner {
@@ -116,7 +117,6 @@
 .aside-banner {
   background: linear-gradient(135deg, #667eea, #764ba2);
 }
-
 /* ОБЛАКО ТЕГОВ */
 .tag-cloud {
   margin-bottom: 30px;
