@@ -1,70 +1,87 @@
-/* ========== СТРУКТУРА 1:4:1 ========== */
+/* ========== УБИРАЕМ БЕЛУЮ РАМКУ ВОКРУГ САЙТА ========== */
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+}
+
+body {
+  background-color: #f5f0e8;
+}
 
 .app {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 .main-container {
+  margin: 0;
+  padding: 0;
+  width: 100%;
   display: flex;
   flex: 1;
   gap: 0;
-  min-height: 500px;
 }
 
 .section {
-  flex: 1;
-  background-color: #e4cce1;
+  margin: 0;
   padding: 20px;
+  background-color: #e4cce1;
   border-right: 1px solid #800345;
-  display: flex;
-  flex-direction: column;
+  flex: 1;
 }
 
 .article {
-  flex: 4;
-  background-color: #ffffff;
+  margin: 0;
   padding: 25px;
-  min-height: 400px;
-  width: 100%;      
-  overflow: hidden;
+  background-color: #ffffff;
+  flex: 4;
 }
 
 .aside {
-  flex: 1;
-  background-color: #f5e6ca;
+  margin: 0;
   padding: 20px;
+  background-color: #f5e6ca;
   border-left: 1px solid #ddd;
-  display: flex;
-  flex-direction: column;
+  flex: 1;
 }
 
-/* HEADER */
 .header {
-  background: linear-gradient(135deg, #fcd2a9,#fed1f7);
+  margin: 0;
   padding: 30px 20px;
+  width: 100%;
+  background: linear-gradient(135deg, #fcd2a9, #fed1f7);
   text-align: center;
   border-bottom: 3px solid #b70272;
 }
 
-.logo-text {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: white;
+.footer {
+  margin: 0;
+  padding: 20px;
+  width: 100%;
+  background: linear-gradient(135deg, #fcd2a9, #fed1f7);
+  color: #230000;
+  text-align: center;
+  border-top: 3px solid #b70272;
 }
 
-.logo-sub {
-  font-size: 0.8rem;
-  color: #f39c12;
-  margin-top: 5px;
-}
+/* ========== ВСЕ ОСТАЛЬНЫЕ СТИЛИ (НЕ МЕНЯЕМ) ========== */
 
-/* МЕНЮ В SECTION */
 .nav-menu {
   margin-bottom: 30px;
-  width: 100%;       
+  width: 100%;
   overflow: hidden;
 }
 
@@ -74,7 +91,7 @@
   border-bottom: 2px solid #b70272;
   padding-bottom: 5px;
   text-align: left;
-  display: block;    
+  display: block;
   width: 100%;
 }
 
@@ -107,9 +124,8 @@
   color: white;
 }
 
-/* БАННЕРЫ */
 .banners, .aside-banners {
-  margin-top: 20px;  
+  margin-top: 20px;
   margin-bottom: 10px;
 }
 
@@ -138,14 +154,14 @@
   color: #680141;
   margin-bottom: 15px;
 }
-/* ОБЛАКО ТЕГОВ */
+
 .tag-cloud {
   margin-bottom: 30px;
-  background-color: #fce4ec;  
+  background-color: #fce4ec;
   padding: 15px;
   border-radius: 15px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  width: 100%;        
+  width: 100%;
   overflow: hidden;
 }
 
@@ -155,15 +171,15 @@
   border-bottom: 2px solid #b70272;
   padding-bottom: 5px;
   text-align: center;
-  display: block ;      
-  width: 100%; 
+  display: block;
+  width: 100%;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: center;  
+  justify-content: center;
   align-items: center;
 }
 
@@ -189,35 +205,14 @@
   box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
-.tag.size-1 { 
-  font-size: 0.9rem; 
-  background-color: #ed43b2; 
-  padding: 8px 16px;
-}
-.tag.size-2 { 
-  font-size: 0.95rem; 
-  background-color: #ed43b2; 
-  padding: 8px 16px;
-}
-.tag.size-3 { 
-  font-size: 1rem; 
-  background-color: #ed43b2; 
-  padding: 8px 16px;
-}
-.tag.size-4 { 
-  font-size: 1.05rem; 
-  background-color: #ed43b2; 
-  padding: 8px 16px;
-}
-.tag.size-5 { 
-  font-size: 1.1rem; 
-  background-color: #ed43b2; 
-  padding: 8px 16px;
-}
+.tag.size-1 { font-size: 0.9rem; padding: 8px 16px; }
+.tag.size-2 { font-size: 0.95rem; padding: 8px 16px; }
+.tag.size-3 { font-size: 1rem; padding: 8px 16px; }
+.tag.size-4 { font-size: 1.05rem; padding: 8px 16px; }
+.tag.size-5 { font-size: 1.1rem; padding: 8px 16px; }
 
-/* СТИЛИ ДЛЯ СТРАНИЦ */
 .page-title {
-  color: #8B0000 ;
+  color: #8B0000;
   border-bottom: 2px solid #b70272;
   padding-bottom: 10px;
   margin-bottom: 20px;
@@ -260,16 +255,6 @@
   cursor: pointer;
 }
 
-/* ФУТЕР */
-.footer {
-  background: linear-gradient(135deg, #fcd2a9,#fed1f7);
-  color: #230000;
-  text-align: center;
-  padding: 20px;
-  border-top: 3px solid #b70272 ;
-}
-
-/* АДАПТИВ ДЛЯ ТЕЛЕФОНА */
 @media (max-width: 800px) {
   .main-container {
     flex-direction: column;
@@ -287,20 +272,19 @@
     border-top: 1px solid #ddd;
   }
   .product-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin: 10px 0;
-  justify-content: center;
-}
-
-.product-tag {
-  display: inline-block;
-  background-color: #f3d3a5;
-  color: #680141;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 0.7rem;
-  font-family: 'Montserrat', sans-serif;
-}
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 10px 0;
+    justify-content: center;
+  }
+  .product-tag {
+    display: inline-block;
+    background-color: #f3d3a5;
+    color: #680141;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-family: 'Montserrat', sans-serif;
+  }
 }
