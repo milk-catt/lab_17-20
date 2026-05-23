@@ -9,9 +9,9 @@ function Aside() {
 
       {/* БАННЕРЫ ВНИЗУ ASIDE */}
       <div className="aside-banners">
-        <div className="aside-banner">📢 Подпишись на новости</div>
-        <div className="aside-banner">💳 Принимаем все карты</div>
-        <div className="aside-banner">⭐ Нас рекомендуют 500+ клиентов</div>
+        <div className="aside-banner">Подпишись на новости в наших пабликах 📢</div>
+        <div className="aside-banner">Принимаем все карты 💳</div>
+        <div className="aside-banner">Нас рекомендуют 500+ клиентов</div>
       </div>
     </div>
   );
