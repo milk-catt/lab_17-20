@@ -11,11 +11,11 @@ import './style.css';
 function App() {
   const [currentPage, setCurrentPage] = useState('new');
   const [cart, setCart] = useState([]);
+  const [selectedTag, setSelectedTag] = useState(null);
 
-  // Функции для корзины
   const addToCart = (product) => {
     setCart([...cart, product]);
-    alert(`🧸 ${product.name} добавлен в корзину!`);
+    alert(`🌸 ${product.name} добавлен в корзину!`);
   };
 
   const removeFromCart = (id) => {
@@ -33,7 +33,16 @@ function App() {
     }
   };
 
-  // Рендер страницы в ARTICLE
+  const filterByTag = (tag) => {
+    setSelectedTag(tag);
+    setCurrentPage('catalog');
+  };
+
+  const clearTag = () => {
+    setSelectedTag(null);
+    setCurrentPage('catalog');
+  };
+
   const renderArticle = () => {
     switch(currentPage) {
       case 'new':
@@ -43,7 +52,11 @@ function App() {
       case 'feedback':
         return <FeedBack />;
       case 'catalog':
-        return <Catalog addToCart={addToCart} />;
+  return <Catalog 
+    addToCart={addToCart} 
+    selectedTag={selectedTag}
+    cartItems={cart}  // ← ДОБАВИТЬ ЭТУ СТРОКУ
+  />;
       case 'cart':
         return <Cart cartItems={cart} removeFromCart={removeFromCart} clearCart={clearCart} />;
       default:
@@ -53,7 +66,6 @@ function App() {
 
   return (
     <div className="app">
-      {/* HEADER */}
       <header className="header">
         <div className="logo">
           <div className="logo-text" style={{ 
@@ -78,16 +90,18 @@ function App() {
         </div>
       </header>
 
-      {/* MAIN — 3 колонки 1:4:1 */}
       <div className="main-container">
-        <Section changePage={setCurrentPage} currentPage={currentPage} />
+        <Section 
+          changePage={setCurrentPage} 
+          currentPage={currentPage}
+          onClearTag={clearTag}
+        />
         <article className="article">
           {renderArticle()}
         </article>
-        <Aside />
+        <Aside onTagClick={filterByTag} />
       </div>
 
-      {/* FOOTER */}
       <footer className="footer">
         <p>📞 8-(800)-555-35-35 | 📧 chekrizova@sfedu.ru, aleolei@sfedu.ru</p>
         <p>📍 Яблоновский, ул. Гагарина, 114.</p>

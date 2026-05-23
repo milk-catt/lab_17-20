@@ -286,4 +286,21 @@
     border-left: none;
     border-top: 1px solid #ddd;
   }
+  .product-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 10px 0;
+  justify-content: center;
+}
+
+.product-tag {
+  display: inline-block;
+  background-color: #f3d3a5;
+  color: #680141;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-family: 'Montserrat', sans-serif;
+}
 }

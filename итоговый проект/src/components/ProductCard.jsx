@@ -1,7 +1,7 @@
 // src/components/ProductCard.jsx
 import React from 'react';
 
-function ProductCard({ product, onAddToCart }) {
+function ProductCard({ product, onAddToCart, isInCart }) {
   const cardStyle = {
     border: '1px solid #e8e8e8',
     borderRadius: '16px',
@@ -9,18 +9,18 @@ function ProductCard({ product, onAddToCart }) {
     margin: '12px',
     textAlign: 'center',
     boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-    backgroundColor: 'white',
+    backgroundColor: isInCart ? '#fce4ec' : 'white',  // ← фон меняется если товар в корзине
     transition: 'transform 0.2s, box-shadow 0.2s',
     cursor: 'pointer',
     width: '260px'
   };
 
-  const imageStyle = {
-    width: '100%',
-    height: '180px',
-    objectFit: 'cover',
-    borderRadius: '12px'
-  };
+const imageStyle = {
+  width: '100%',
+  height: 'auto',
+  borderRadius: '12px',
+  objectFit: 'contain'
+};
 
   const titleStyle = {
     fontSize: '1.2rem',
@@ -36,12 +36,12 @@ function ProductCard({ product, onAddToCart }) {
   };
 
   const buttonStyle = {
-    backgroundColor: '#ff69b4',
+    backgroundColor: isInCart ? '#95a5a6' : '#ff69b4',  // ← если в корзине, кнопка серая
     color: 'white',
     border: 'none',
     padding: '10px 20px',
     borderRadius: '30px',
-    cursor: 'pointer',
+    cursor: isInCart ? 'default' : 'pointer',  // ← если в корзине, нельзя нажать
     fontSize: '16px',
     fontWeight: 'bold',
     marginTop: '10px',
@@ -49,8 +49,10 @@ function ProductCard({ product, onAddToCart }) {
   };
 
   const handleMouseEnter = (e) => {
-    e.currentTarget.style.transform = 'translateY(-5px)';
-    e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.12)';
+    if (!isInCart) {
+      e.currentTarget.style.transform = 'translateY(-5px)';
+      e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.12)';
+    }
   };
 
   const handleMouseLeave = (e) => {
@@ -70,9 +72,10 @@ function ProductCard({ product, onAddToCart }) {
       <p style={priceStyle}>{product.price} ₽</p>
       <button 
         style={buttonStyle}
-        onClick={() => onAddToCart(product)}
+        onClick={() => !isInCart && onAddToCart(product)}  // ← если в корзине, не добавлять
+        disabled={isInCart}
       >
-        🌸 В корзину
+        {isInCart ? '✅Добаленно в корзину' : '🌸 В корзину'}
       </button>
     </div>
   );
