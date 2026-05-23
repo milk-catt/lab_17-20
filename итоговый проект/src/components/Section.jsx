@@ -36,9 +36,9 @@ function Section({ changePage, currentPage, onClearTag }) {  // ← добави
 
       <div className="banners">
         <h4>🎁 Акции</h4>
-        <div className="banner">Скидка 20% на первый заказ</div>
-        <div className="banner">Бесплатная доставка от 1500₽</div>
-        <div className="banner">Подарок при заказе от 2000₽</div>
+        <div className="banner">Скидка 10% на первый заказ</div>
+        <div className="banner">Бесплатная доставка от 3000₽</div>
+        <div className="banner">Открытки с любовью к каждому букету</div>
       </div>
     </div>
   );

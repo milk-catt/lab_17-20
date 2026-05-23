@@ -105,7 +105,7 @@ function App() {
             marginTop: '8px',
             color: '#680141'
           }}>
-            Скажи «люблю» без единого слова.
+            Скажи «люблю» без единого слова
           </div>
         </div>
       </header>
@@ -123,8 +123,12 @@ function App() {
       </div>
 
       <footer className="footer">
-        <p>📞 8-(800)-555-35-35 | 📧 chekrizova@sfedu.ru, aleolei@sfedu.ru</p>
-        <p>📍 Яблоновский, ул. Гагарина, 114.</p>
+        <p>
+          📞 <a href="tel:88005553535">8-(800)-555-35-35  </a> 
+           📧 <a href="mailto:chekrizova@sfedu.ru">chekrizova@sfedu.ru </a>
+          |<a href="mailto:aleolei@sfedu.ru"> aleolei@sfedu.ru</a>
+        </p>
+        <p>📍 пгт. Яблоновский, ул. Гагарина, 114.</p>
         <p>© 2026 Все права защищены</p>
       </footer>
     </div>
