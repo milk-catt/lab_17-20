@@ -56,8 +56,25 @@ function App() {
       {/* HEADER */}
       <header className="header">
         <div className="logo">
-          <div className="logo-text">🧸 Мягкий мир</div>
-          <div className="logo-sub">Мягкие игрушки с душой</div>
+          <div className="logo-text" style={{ 
+            fontSize: '2.5rem', 
+            fontWeight: 'bold',
+            fontFamily: "'Playfair Display', 'Segoe UI', 'Georgia', serif",
+            letterSpacing: '2px',
+            color: '#8B0000'
+          }}>
+            Бонсай 🌸 BONSSAI
+          </div>
+          <div className="logo-sub" style={{ 
+            fontSize: '1.2rem', 
+            fontFamily: "'Montserrat', 'Segoe UI', sans-serif",
+            fontStyle: 'italic',
+            letterSpacing: '1px',
+            marginTop: '8px',
+            color: '#680141'
+          }}>
+            Скажи «люблю» без единого слова.
+          </div>
         </div>
       </header>
 

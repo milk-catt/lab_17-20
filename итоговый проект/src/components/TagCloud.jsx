@@ -2,11 +2,11 @@ import React from 'react';
 
 function TagCloud() {
   const tags = [
-    { name: 'Мягкие игрушки', size: 5 },
-    { name: 'Подарки', size: 4 },
-    { name: 'Детям', size: 3 },
-    { name: 'Развивающие', size: 2 },
-    { name: 'Экологичные', size: 1 },
+    { name: 'Розы', size: 5 },
+    { name: 'Пионы', size: 4 },
+    { name: 'Сирень', size: 3 },
+    { name: 'Цветочные корзинки', size: 2 },
+    { name: 'Букеты из бабочек', size: 1 },
     { name: 'Хиты продаж', size: 4 },
     { name: 'Новинки', size: 3 },
     { name: 'Распродажа', size: 5 },
@@ -14,7 +14,7 @@ function TagCloud() {
 
   return (
     <div className="tag-cloud">
-      <h3>🏷️ Облако тегов</h3>
+      <h3>Навигация</h3>
       <div className="tags">
         {tags.map((tag, index) => (
           <span key={index} className={`tag size-${tag.size}`}>

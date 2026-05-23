@@ -5,7 +5,7 @@ function Section({ changePage, currentPage }) {
     { id: 'new', name: '📰 Новости' },
     { id: 'about', name: '👤 О магазине' },
     { id: 'feedback', name: '📞 Обратная связь' },
-    { id: 'catalog', name: '🧸 Каталог товаров' },
+    { id: 'catalog', name: '💐 Каталог товаров' },
     { id: 'cart', name: '🛒 Корзина' }
   ];
 
