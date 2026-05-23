@@ -29,14 +29,22 @@ function App() {
   }
 };
 
-  const removeFromCart = (id) => {
+ // В App.jsx найдите функцию removeFromCart и замените её на эту:
+const removeFromCart = (id) => {
+  // Находим товар по id
+  const product = cart.find(item => item.id === id);
+  
+  // Показываем подтверждение
+  if (window.confirm(`❓ Вы уверены, что хотите удалить "${product?.name}" из корзины?`)) {
     const index = cart.findIndex(item => item.id === id);
     if (index !== -1) {
       const newCart = [...cart];
       newCart.splice(index, 1);
       setCart(newCart);
+      alert(`🗑️ ${product?.name} удалён из корзины!`);
     }
-  };
+  }
+};
 
   const clearCart = () => {
     if (window.confirm('Очистить корзину?')) {
