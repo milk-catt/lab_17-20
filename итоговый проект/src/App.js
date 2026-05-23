@@ -14,9 +14,20 @@ function App() {
   const [selectedTag, setSelectedTag] = useState(null);
 
   const addToCart = (product) => {
+  // Проверяем, есть ли уже товар в корзине
+  const isAlreadyInCart = cart.some(item => item.id === product.id);
+  
+  if (isAlreadyInCart) {
+    // Если товар уже в корзине - удаляем его
+    const newCart = cart.filter(item => item.id !== product.id);
+    setCart(newCart);
+    alert(`🗑️ ${product.name} удалён из корзины!`);
+  } else {
+    // Если товара нет - добавляем
     setCart([...cart, product]);
     alert(`🌸 ${product.name} добавлен в корзину!`);
-  };
+  }
+};
 
   const removeFromCart = (id) => {
     const index = cart.findIndex(item => item.id === id);

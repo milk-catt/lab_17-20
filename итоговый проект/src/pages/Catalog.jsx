@@ -3,7 +3,7 @@ import React from 'react';
 import ProductCard from '../components/ProductCard';
 import { products } from '../data/products';
 
-function Catalog({ addToCart, selectedTag, cartItems }) {  // ← добавить cartItems
+function Catalog({ addToCart, selectedTag, cartItems }) {
   
   const filteredProducts = selectedTag 
     ? products.filter(product => 
@@ -61,7 +61,7 @@ function Catalog({ addToCart, selectedTag, cartItems }) {  // ← добавит
               key={product.id} 
               product={product} 
               onAddToCart={addToCart}
-              isInCart={isProductInCart(product.id)}  // ← передаём, в корзине ли товар
+              isInCart={isProductInCart(product.id)}
             />
           ))}
         </div>

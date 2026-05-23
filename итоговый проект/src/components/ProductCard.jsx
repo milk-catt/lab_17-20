@@ -1,7 +1,9 @@
 // src/components/ProductCard.jsx
-import React from 'react';
+import React, { useState } from 'react';
 
 function ProductCard({ product, onAddToCart, isInCart }) {
+  const [isHovered, setIsHovered] = useState(false);
+
   const cardStyle = {
     border: '1px solid #e8e8e8',
     borderRadius: '16px',
@@ -9,18 +11,18 @@ function ProductCard({ product, onAddToCart, isInCart }) {
     margin: '12px',
     textAlign: 'center',
     boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-    backgroundColor: isInCart ? '#fce4ec' : 'white',  // ← фон меняется если товар в корзине
+    backgroundColor: isInCart ? '#fce4ec' : 'white',
     transition: 'transform 0.2s, box-shadow 0.2s',
     cursor: 'pointer',
     width: '260px'
   };
 
-const imageStyle = {
-  width: '100%',
-  height: 'auto',
-  borderRadius: '12px',
-  objectFit: 'contain'
-};
+  const imageStyle = {
+    width: '100%',
+    height: '200px',
+    borderRadius: '12px',
+    objectFit: 'cover'
+  };
 
   const titleStyle = {
     fontSize: '1.2rem',
@@ -36,19 +38,21 @@ const imageStyle = {
   };
 
   const buttonStyle = {
-    backgroundColor: isInCart ? '#95a5a6' : '#ff69b4',  // ← если в корзине, кнопка серая
+    backgroundColor: isInCart ? (isHovered ? '#e74c3c' : '#95a5a6') : '#ff69b4',
     color: 'white',
     border: 'none',
     padding: '10px 20px',
     borderRadius: '30px',
-    cursor: isInCart ? 'default' : 'pointer',  // ← если в корзине, нельзя нажать
+    cursor: 'pointer',
     fontSize: '16px',
     fontWeight: 'bold',
     marginTop: '10px',
-    width: '100%'
+    width: '100%',
+    transition: 'all 0.3s ease'
   };
 
   const handleMouseEnter = (e) => {
+    setIsHovered(true);
     if (!isInCart) {
       e.currentTarget.style.transform = 'translateY(-5px)';
       e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.12)';
@@ -56,8 +60,23 @@ const imageStyle = {
   };
 
   const handleMouseLeave = (e) => {
+    setIsHovered(false);
     e.currentTarget.style.transform = 'translateY(0)';
     e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+  };
+
+  const handleButtonClick = () => {
+    onAddToCart(product);
+  };
+
+  const getButtonText = () => {
+    if (isInCart && isHovered) {
+      return '🗑️ Удалить из корзины';
+    } else if (isInCart && !isHovered) {
+      return '✅ В корзине';
+    } else {
+      return '🌸 В корзину';
+    }
   };
 
   return (
@@ -70,12 +89,12 @@ const imageStyle = {
       <h3 style={titleStyle}>{product.name}</h3>
       <p style={{ fontSize: '14px', color: '#777' }}>{product.description}</p>
       <p style={priceStyle}>{product.price} ₽</p>
+      
       <button 
         style={buttonStyle}
-        onClick={() => !isInCart && onAddToCart(product)}  // ← если в корзине, не добавлять
-        disabled={isInCart}
+        onClick={handleButtonClick}
       >
-        {isInCart ? '✅Добаленно в корзину' : '🌸 В корзину'}
+        {getButtonText()}
       </button>
     </div>
   );
