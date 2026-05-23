@@ -14,7 +14,10 @@ function ProductCard({ product, onAddToCart, isInCart }) {
     backgroundColor: isInCart ? '#fce4ec' : 'white',
     transition: 'transform 0.2s, box-shadow 0.2s',
     cursor: 'pointer',
-    width: '260px'
+    width: '260px',
+    display: 'flex',           // 👈 ДОБАВИТЬ
+    flexDirection: 'column',   // 👈 ДОБАВИТЬ (вертикальное расположение)
+    height: '100%'             // 👈 ДОБАВИТЬ (чтобы карточка растягивалась)
   };
 
   const imageStyle = {
@@ -28,6 +31,13 @@ function ProductCard({ product, onAddToCart, isInCart }) {
     fontSize: '1.2rem',
     margin: '12px 0 8px 0',
     color: '#4a4a4a'
+  };
+
+  const descriptionStyle = {
+    fontSize: '14px',
+    color: '#777',
+    flexGrow: 1,              // 👈 ДОБАВИТЬ (занимает всё свободное место)
+    marginBottom: '12px'
   };
 
   const priceStyle = {
@@ -48,7 +58,8 @@ function ProductCard({ product, onAddToCart, isInCart }) {
     fontWeight: 'bold',
     marginTop: '10px',
     width: '100%',
-    transition: 'all 0.3s ease'
+    transition: 'all 0.3s ease',
+    alignSelf: 'flex-end'      // 👈 ДОБАВИТЬ (прижимает кнопку к низу)
   };
 
   const handleMouseEnter = (e) => {
@@ -87,7 +98,7 @@ function ProductCard({ product, onAddToCart, isInCart }) {
     >
       <img src={product.image} alt={product.name} style={imageStyle} />
       <h3 style={titleStyle}>{product.name}</h3>
-      <p style={{ fontSize: '14px', color: '#777' }}>{product.description}</p>
+      <p style={descriptionStyle}>{product.description}</p>
       <p style={priceStyle}>{product.price} ₽</p>
       
       <button 
