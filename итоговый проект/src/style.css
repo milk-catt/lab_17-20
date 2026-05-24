@@ -1,5 +1,4 @@
 /* ========== УБИРАЕМ БЕЛУЮ РАМКУ ВОКРУГ САЙТА ========== */
-
 * {
   margin: 0;
   padding: 0;
@@ -67,6 +66,7 @@ body {
   border-bottom: 3px solid #b70272;
 }
 
+/* ========== ПОДВАЛ И ССЫЛКИ В НЁМ ========== */
 .footer {
   margin: 0;
   padding: 20px;
@@ -77,7 +77,18 @@ body {
   border-top: 3px solid #b70272;
 }
 
-/* ========== ВСЕ ОСТАЛЬНЫЕ СТИЛИ (НЕ МЕНЯЕМ) ========== */
+/* ЭТО ГЛАВНОЕ — ССЫЛКИ В ПОДВАЛЕ (РАБОТАЕТ ВСЕГДА) */
+.footer a {
+  color: #560b0b !important;
+  text-decoration: none !important;
+}
+
+.footer a:hover {
+  color: #3f0c0c !important;
+  text-decoration: underline !important;
+}
+
+/* ========== ВСЕ ОСТАЛЬНЫЕ СТИЛИ ========== */
 
 .nav-menu {
   margin-bottom: 30px;
@@ -255,6 +266,25 @@ body {
   cursor: pointer;
 }
 
+.product-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 10px 0;
+  justify-content: center;
+}
+
+.product-tag {
+  display: inline-block;
+  background-color: #f3d3a5;
+  color: #680141;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* АДАПТИВ ДЛЯ ТЕЛЕФОНА */
 @media (max-width: 800px) {
   .main-container {
     flex-direction: column;
@@ -271,20 +301,128 @@ body {
     border-left: none;
     border-top: 1px solid #ddd;
   }
-  .product-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin: 10px 0;
-    justify-content: center;
-  }
-  .product-tag {
-    display: inline-block;
-    background-color: #f3d3a5;
-    color: #680141;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 0.7rem;
-    font-family: 'Montserrat', sans-serif;
-  }
+ 
 }
+/* ===== ВСЕ ССЫЛКИ ОРАНЖЕВЫЕ ===== */
+a {
+  color: #560b0b !important;
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: #560b0b !important;
+  text-decoration: underline !important;
+}
+
+/* ===== НО ССЫЛКИ В ПОДВАЛЕ ТЁМНЫЕ (если хотите оставить как есть) ===== */
+.footer a {
+  color: #560b0b !important;
+}
+
+.footer a:hover {
+  color: #3f0c0c !important;
+}
+
+/* ===== ПОДКЛЮЧАЕМ ШРИФТЫ ===== */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+/* ===== ОСНОВНОЙ ТЕКСТ ВСЕГО САЙТА ===== */
+body, .article, .section, p, li, .news-item, .description {
+  font-family: 'Montserrat', 'Segoe UI', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ===== ЗАГОЛОВКИ ===== */
+h1, h2, h3, h4, .page-title, .nav-menu h3, .tag-cloud h3 {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* ===== ЛОГОТИП ===== */
+.logo-text {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 2.2rem;
+  letter-spacing: 1px;
+}
+
+/* ===== ПОДЗАГОЛОВОК ЛОГОТИПА ===== */
+.logo-sub {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+/* ===== ЦЕНЫ ===== */
+.price, .product-price {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* ===== КНОПКИ ===== */
+button, .banner, .aside-banner {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* ===== ТЕГИ ===== */
+.tag {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+/* НАЗВАНИЕ ТОВАРА — ДРУЖЕЛЮБНЫЙ, НЕОФИЦИАЛЬНЫЙ ШРИФТ */
+.product-card h3 {
+   font-family: 'Philosopher', sans-serif !important;
+  font-weight: 700;
+  font-size: 1.35rem;
+  font-size: 1.35rem !important;
+  margin: 12px 0 8px 0;
+  color: #4a4a4a;
+  letter-spacing: 0.5px;
+}
+
+/* ОПИСАНИЕ ТОВАРА */
+.product-card p {
+  font-family: 'Nunito', 'Segoe UI', sans-serif !important;
+  font-size: 0.9rem !important;
+  line-height: 1.4;
+  color: #666;
+}
+
+/* ТЕГИ НА КАРТОЧКЕ ТОВАРА — БОЛЬШЕ */
+.product-tag {
+  display: inline-block;
+  background-color: #f3d3a5;
+  color: #680141;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem !important;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+/* ОБЛАКО ТЕГОВ (в правой колонке) — БОЛЬШЕ */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f3d3a5, #f1a1c7);
+  color: rgb(198, 82, 119);
+  padding: 10px 22px;
+  border-radius: 35px;
+  font-size: 1rem !important;
+  cursor: pointer;
+  text-align: center;
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+

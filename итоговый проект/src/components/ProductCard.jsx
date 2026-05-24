@@ -15,9 +15,9 @@ function ProductCard({ product, onAddToCart, isInCart }) {
     transition: 'transform 0.2s, box-shadow 0.2s',
     cursor: 'pointer',
     width: '260px',
-    display: 'flex',           // 👈 ДОБАВИТЬ
-    flexDirection: 'column',   // 👈 ДОБАВИТЬ (вертикальное расположение)
-    height: '100%'             // 👈 ДОБАВИТЬ (чтобы карточка растягивалась)
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%'
   };
 
   const imageStyle = {
@@ -27,16 +27,15 @@ function ProductCard({ product, onAddToCart, isInCart }) {
     objectFit: 'cover'
   };
 
+  // УБРАЛИ font-size и color из titleStyle — теперь они берутся из CSS!
   const titleStyle = {
-    fontSize: '1.2rem',
-    margin: '12px 0 8px 0',
-    color: '#4a4a4a'
+    margin: '12px 0 8px 0'
   };
 
   const descriptionStyle = {
     fontSize: '14px',
     color: '#777',
-    flexGrow: 1,              // 👈 ДОБАВИТЬ (занимает всё свободное место)
+    flexGrow: 1,
     marginBottom: '12px'
   };
 
@@ -59,7 +58,7 @@ function ProductCard({ product, onAddToCart, isInCart }) {
     marginTop: '10px',
     width: '100%',
     transition: 'all 0.3s ease',
-    alignSelf: 'flex-end'      // 👈 ДОБАВИТЬ (прижимает кнопку к низу)
+    alignSelf: 'flex-end'
   };
 
   const handleMouseEnter = (e) => {

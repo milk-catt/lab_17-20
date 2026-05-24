@@ -13,7 +13,7 @@ function FeedBack() {
     <div>
       <h2 className="page-title">📞 Обратная связь</h2>
       
-      <div style={{ marginBottom: 20 }}>
+      <div className="feedback-content" style={{ marginBottom: 20 }}>
         <p>📱 Телефон: <strong> 
           <a href="tel:88005553535">8-(800)-555-35-35</a> 
           - Проще позвонить чем у кого-то занимать!😘</strong></p>
