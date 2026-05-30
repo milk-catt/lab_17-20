@@ -1,4 +1,3 @@
-/* ========== УБИРАЕМ БЕЛУЮ РАМКУ ВОКРУГ САЙТА ========== */
 * {
   margin: 0;
   padding: 0;
@@ -66,7 +65,6 @@ body {
   border-bottom: 3px solid #b70272;
 }
 
-/* ========== ПОДВАЛ И ССЫЛКИ В НЁМ ========== */
 .footer {
   margin: 0;
   padding: 20px;
@@ -77,7 +75,6 @@ body {
   border-top: 3px solid #b70272;
 }
 
-/* ЭТО ГЛАВНОЕ — ССЫЛКИ В ПОДВАЛЕ (РАБОТАЕТ ВСЕГДА) */
 .footer a {
   color: #560b0b !important;
   text-decoration: none !important;
@@ -87,8 +84,6 @@ body {
   color: #3f0c0c !important;
   text-decoration: underline !important;
 }
-
-/* ========== ВСЕ ОСТАЛЬНЫЕ СТИЛИ ========== */
 
 .nav-menu {
   margin-bottom: 30px;
@@ -284,7 +279,6 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-/* АДАПТИВ ДЛЯ ТЕЛЕФОНА */
 @media (max-width: 800px) {
   .main-container {
     flex-direction: column;
@@ -303,7 +297,7 @@ body {
   }
  
 }
-/* ===== ВСЕ ССЫЛКИ ОРАНЖЕВЫЕ ===== */
+
 a {
   color: #560b0b !important;
   text-decoration: none !important;
@@ -314,7 +308,6 @@ a:hover {
   text-decoration: underline !important;
 }
 
-/* ===== НО ССЫЛКИ В ПОДВАЛЕ ТЁМНЫЕ (если хотите оставить как есть) ===== */
 .footer a {
   color: #560b0b !important;
 }
@@ -323,10 +316,8 @@ a:hover {
   color: #3f0c0c !important;
 }
 
-/* ===== ПОДКЛЮЧАЕМ ШРИФТЫ ===== */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
-/* ===== ОСНОВНОЙ ТЕКСТ ВСЕГО САЙТА ===== */
 body, .article, .section, p, li, .news-item, .description {
   font-family: 'Montserrat', 'Segoe UI', sans-serif;
   font-weight: 400;
@@ -334,14 +325,12 @@ body, .article, .section, p, li, .news-item, .description {
   line-height: 1.5;
 }
 
-/* ===== ЗАГОЛОВКИ ===== */
 h1, h2, h3, h4, .page-title, .nav-menu h3, .tag-cloud h3 {
   font-family: 'Playfair Display', 'Georgia', serif;
   font-weight: 500;
   letter-spacing: 0.5px;
 }
 
-/* ===== ЛОГОТИП ===== */
 .logo-text {
   font-family: 'Playfair Display', serif;
   font-weight: 600;
@@ -349,7 +338,6 @@ h1, h2, h3, h4, .page-title, .nav-menu h3, .tag-cloud h3 {
   letter-spacing: 1px;
 }
 
-/* ===== ПОДЗАГОЛОВОК ЛОГОТИПА ===== */
 .logo-sub {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
@@ -357,27 +345,23 @@ h1, h2, h3, h4, .page-title, .nav-menu h3, .tag-cloud h3 {
   font-size: 0.95rem;
 }
 
-/* ===== ЦЕНЫ ===== */
 .price, .product-price {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-size: 1.1rem;
 }
 
-/* ===== КНОПКИ ===== */
 button, .banner, .aside-banner {
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   letter-spacing: 0.5px;
 }
 
-/* ===== ТЕГИ ===== */
 .tag {
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
 }
 
-/* НАЗВАНИЕ ТОВАРА — ДРУЖЕЛЮБНЫЙ, НЕОФИЦИАЛЬНЫЙ ШРИФТ */
 .product-card h3 {
    font-family: 'Philosopher', sans-serif !important;
   font-weight: 700;
@@ -388,7 +372,6 @@ button, .banner, .aside-banner {
   letter-spacing: 0.5px;
 }
 
-/* ОПИСАНИЕ ТОВАРА */
 .product-card p {
   font-family: 'Nunito', 'Segoe UI', sans-serif !important;
   font-size: 0.9rem !important;
@@ -396,7 +379,6 @@ button, .banner, .aside-banner {
   color: #666;
 }
 
-/* ТЕГИ НА КАРТОЧКЕ ТОВАРА — БОЛЬШЕ */
 .product-tag {
   display: inline-block;
   background-color: #f3d3a5;
@@ -408,7 +390,6 @@ button, .banner, .aside-banner {
   font-weight: 500;
 }
 
-/* ОБЛАКО ТЕГОВ (в правой колонке) — БОЛЬШЕ */
 .tag {
   display: inline-flex;
   align-items: center;
@@ -426,3 +407,20 @@ button, .banner, .aside-banner {
   box-shadow: 0 3px 8px rgba(0,0,0,0.15);
 }
 
+.language-switcher {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+.header {
+  position: relative;
+}
+
+@media (max-width: 800px) {
+  .language-switcher {
+    position: static;
+    text-align: right;
+    margin-top: 10px;
+  }
+}

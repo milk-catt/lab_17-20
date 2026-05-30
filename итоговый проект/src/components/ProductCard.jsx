@@ -1,7 +1,6 @@
-// src/components/ProductCard.jsx
 import React, { useState } from 'react';
 
-function ProductCard({ product, onAddToCart, isInCart }) {
+function ProductCard({ product, onAddToCart, onRemoveFromCart, isInCart, t, language }) {
   const [isHovered, setIsHovered] = useState(false);
 
   const cardStyle = {
@@ -27,7 +26,6 @@ function ProductCard({ product, onAddToCart, isInCart }) {
     objectFit: 'cover'
   };
 
-  // УБРАЛИ font-size и color из titleStyle — теперь они берутся из CSS!
   const titleStyle = {
     margin: '12px 0 8px 0'
   };
@@ -61,6 +59,33 @@ function ProductCard({ product, onAddToCart, isInCart }) {
     alignSelf: 'flex-end'
   };
 
+  // Функция для получения текста в зависимости от языка
+  const getText = (field) => {
+    if (!field) return '';
+    if (typeof field === 'object') {
+      return field[language] || field.ru;
+    }
+    return field;
+  };
+
+  const getButtonText = () => {
+    if (isInCart && isHovered) {
+      return t.removeFromCart || '🗑️ Удалить';
+    } else if (isInCart && !isHovered) {
+      return t.inCart || '✅ В корзине';
+    } else {
+      return t.addToCart || '🌸 В корзину';
+    }
+  };
+
+  const handleButtonClick = () => {
+    if (isInCart && isHovered) {
+      onRemoveFromCart(product.id);
+    } else if (!isInCart) {
+      onAddToCart(product);
+    }
+  };
+
   const handleMouseEnter = (e) => {
     setIsHovered(true);
     if (!isInCart) {
@@ -75,29 +100,15 @@ function ProductCard({ product, onAddToCart, isInCart }) {
     e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
   };
 
-  const handleButtonClick = () => {
-    onAddToCart(product);
-  };
-
-  const getButtonText = () => {
-    if (isInCart && isHovered) {
-      return '🗑️ Удалить из корзины';
-    } else if (isInCart && !isHovered) {
-      return '✅ В корзине';
-    } else {
-      return '🌸 В корзину';
-    }
-  };
-
   return (
     <div 
       style={cardStyle}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <img src={product.image} alt={product.name} style={imageStyle} />
-      <h3 style={titleStyle}>{product.name}</h3>
-      <p style={descriptionStyle}>{product.description}</p>
+      <img src={product.image} alt={getText(product.name)} style={imageStyle} />
+      <h3 style={titleStyle}>{getText(product.name)}</h3>
+      <p style={descriptionStyle}>{getText(product.description)}</p>
       <p style={priceStyle}>{product.price} ₽</p>
       
       <button 

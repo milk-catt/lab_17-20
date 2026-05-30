@@ -1,43 +1,65 @@
 import React from 'react';
 
-function About() {
+function About({ t, language }) {
   return (
     <div>
       <div>
-        <h2 className="page-title" style={{ fontSize: '2.5rem' }}>👤 О Нас</h2>
+        <h2 className="page-title" style={{ fontSize: '2.5rem' }}>
+          {language === 'en' ? "👤 About Us" : "👤 О Нас"}
+        </h2>
         <div style={{ lineHeight: 1.8, fontSize: '20px' }}>
-          <p>
-            <strong style={{ color: '#972874', fontSize: '1.5rem' }}>Бонсай . BONSSAI</strong> — 
-            <strong style={{ color: '#8f1838', fontSize: '20px' }}> цветочный рай.</strong>
-          </p>
-          <p style={{ fontSize: '20px' }}>
-            В каждом цветке — частичка души, в каждом букете — история любви.  
-            <strong style={{ color: '#5f1180', fontSize: '20px' }}> Бонсай</strong> — там, где расцветают чувства.
-          </p>
-          <p style={{ fontSize: '20px' }}>
-            У нас за плечами — флористическое образование.
-            А это значит, что мы не просто ставим цветы в вазу.
-            Мы знаем, как подружить розу с эвкалиптом, почему пион поворачивается 
-            к солнцу и какой букет скажет 
-            <strong style={{ color: '#068606', fontStyle: 'italic', fontSize: '20px' }}> «спасибо»</strong> без единого слова.
-          </p>
-          <p style={{ fontSize: '20px' }}>Мы умеем собирать:
-            — монобукеты, которые кричат о любви,
-            — каскадные композиции для особых дней,
-            — полевые, свободные, асимметричные, свадебные, мужские, детские — любые.
-          </p>
-          <p style={{ fontSize: '20px' }}>
-            <strong style={{ color: '#af0f4c', fontSize: '1.5rem' }}>Цветы — это язык.</strong> 
-            <span style={{ fontSize: '20px' }}> Мы на нём говорим свободно.</span>
-          </p>
+          {language === 'en' ? (
+            <>
+              <p>
+                <strong style={{ color: '#972874', fontSize: '1.5rem' }}>Bonsai . BONSSAI</strong> — 
+                <strong style={{ color: '#8f1838', fontSize: '20px' }}> flower paradise.</strong>
+              </p>
+              <p style={{ fontSize: '20px' }}>
+                In every flower there is a piece of soul, in every bouquet there is a love story.
+                <strong style={{ color: '#5f1180', fontSize: '20px' }}> Bonsai</strong> — where feelings bloom.
+              </p>
+              <p style={{ fontSize: '20px' }}>
+                We have a floristic education. This means that we don't just put flowers in a vase. We know how to make friends between a rose and eucalyptus, why a peony turns to the sun and what bouquet will say
+                <strong style={{ color: '#068606', fontStyle: 'italic', fontSize: '20px' }}> «thank you»</strong> without a single word.
+              </p>
+              <p style={{ fontSize: '20px' }}>
+                We can create: monobouquets that scream about love, cascading compositions for special days, field, free, asymmetrical, wedding, men's, children's — any kind.
+              </p>
+              <p style={{ fontSize: '20px' }}>
+                <strong style={{ color: '#af0f4c', fontSize: '1.5rem' }}>Flowers are a language.</strong>
+                <span style={{ fontSize: '20px' }}> We speak it fluently.</span>
+              </p>
+            </>
+          ) : (
+            <>
+              <p>
+                <strong style={{ color: '#972874', fontSize: '1.5rem' }}>Бонсай . BONSSAI</strong> — 
+                <strong style={{ color: '#8f1838', fontSize: '20px' }}> цветочный рай.</strong>
+              </p>
+              <p style={{ fontSize: '20px' }}>
+                В каждом цветке — частичка души, в каждом букете — история любви.
+                <strong style={{ color: '#5f1180', fontSize: '20px' }}> Бонсай</strong> — там, где расцветают чувства.
+              </p>
+              <p style={{ fontSize: '20px' }}>
+                У нас за плечами — флористическое образование. А это значит, что мы не просто ставим цветы в вазу. Мы знаем, как подружить розу с эвкалиптом, почему пион поворачивается к солнцу и какой букет скажет
+                <strong style={{ color: '#068606', fontStyle: 'italic', fontSize: '20px' }}> «спасибо»</strong> без единого слова.
+              </p>
+              <p style={{ fontSize: '20px' }}>
+                Мы умеем собирать: монобукеты, которые кричат о любви, каскадные композиции для особых дней, полевые, свободные, асимметричные, свадебные, мужские, детские — любые.
+              </p>
+              <p style={{ fontSize: '20px' }}>
+                <strong style={{ color: '#af0f4c', fontSize: '1.5rem' }}>Цветы — это язык.</strong>
+                <span style={{ fontSize: '20px' }}> Мы на нём говорим свободно.</span>
+              </p>
+            </>
+          )}
         </div>
       </div>
 
-      {/* ФОТО МАГАЗИНА */}
       <div style={{ marginTop: '30px', textAlign: 'center' }}>
         <img 
           src="/images/magaz.jpg"
-          alt="Наш цветочный магазин"
+          alt={language === 'en' ? "Our flower shop" : "Наш цветочный магазин"}
           style={{ 
             width: '100%', 
             maxWidth: '800px',
@@ -47,23 +69,21 @@ function About() {
         />
       </div> 
 
-      {/* ГАЛЕРЕЯ КОМАНДЫ - ПО 2 ФОТО В РЯДУ */}
       <div style={{ marginTop: '40px' }}>
         <h3 style={{ 
-  textAlign: 'center', 
-  color: '#8B0000', 
-  marginBottom: '20px', 
-  fontSize: '2rem',
-  fontFamily: "'Playfair Display', 'Georgia', serif",
-  fontWeight: 'normal',
-  letterSpacing: '1px'
-}}>
-  <span style={{ fontSize: '2rem', marginRight: '15px' }}>🌸</span>
-  Наша команда флористов
-  <span style={{ fontSize: '2rem', marginLeft: '15px' }}>🌸</span>
-</h3>
+          textAlign: 'center', 
+          color: '#8B0000', 
+          marginBottom: '20px', 
+          fontSize: '2rem',
+          fontFamily: "'Playfair Display', 'Georgia', serif",
+          fontWeight: 'normal',
+          letterSpacing: '1px'
+        }}>
+          <span style={{ fontSize: '2rem', marginRight: '15px' }}>🌸</span>
+          {language === 'en' ? "Our florist team" : "Наша команда флористов"}
+          <span style={{ fontSize: '2rem', marginLeft: '15px' }}>🌸</span>
+        </h3>
         
-        {/* ПЕРВЫЙ РЯД - 2 фотографии */}
         <div style={{ 
           display: 'flex', 
           flexWrap: 'wrap', 
@@ -72,11 +92,10 @@ function About() {
           alignItems: 'center',
           marginBottom: '30px'
         }}>
-          {/* КАРТИНКА 1 - Александра */}
           <div style={{ textAlign: 'center', flex: '1 1 300px', maxWidth: '350px' }}>
             <img 
               src="/images/alex.jpg"
-              alt="Александра" 
+              alt="Alexandra" 
               style={{ 
                 width: '100%', 
                 maxWidth: '300px',
@@ -87,15 +106,14 @@ function About() {
               }} 
             />
             <p style={{ marginTop: '12px', color: '#666', fontSize: '18px' }}>
-              🌹 Александра - флорист
+              🌹 {language === 'en' ? "Alexandra - florist" : "Александра - флорист"}
             </p>
           </div>
 
-          {/* КАРТИНКА 2 - Анастасия */}
           <div style={{ textAlign: 'center', flex: '1 1 300px', maxWidth: '350px' }}>
             <img 
               src="/images/nastya.jpg" 
-              alt="Анастасия" 
+              alt="Anastasia" 
               style={{ 
                 width: '100%', 
                 maxWidth: '300px',
@@ -106,12 +124,11 @@ function About() {
               }} 
             />
             <p style={{ marginTop: '12px', color: '#666', fontSize: '18px' }}>
-              🌸 Анастасия - флорист
+              🌸 {language === 'en' ? "Anastasia - florist" : "Анастасия - флорист"}
             </p>
           </div>
         </div>
 
-        {/* ВТОРОЙ РЯД - 2 фотографии */}
         <div style={{ 
           display: 'flex', 
           flexWrap: 'wrap', 
@@ -119,11 +136,10 @@ function About() {
           justifyContent: 'center',
           alignItems: 'center'
         }}>
-          {/* КАРТИНКА 3 - Динара */}
           <div style={{ textAlign: 'center', flex: '1 1 300px', maxWidth: '350px' }}>
             <img 
               src="/images/din.jpg" 
-              alt="Динара" 
+              alt="Dinara" 
               style={{ 
                 width: '100%', 
                 maxWidth: '300px',
@@ -134,15 +150,14 @@ function About() {
               }} 
             />
             <p style={{ marginTop: '12px', color: '#666', fontSize: '18px' }}>
-              👑 Дин - лучший сотрудник месяца
+              👑 {language === 'en' ? "Dean - employee of the month" : "Дин - лучший сотрудник месяца"}
             </p>
           </div>
 
-          {/* КАРТИНКА 4 - Лунтик */}
           <div style={{ textAlign: 'center', flex: '1 1 300px', maxWidth: '350px' }}>
             <img 
               src="/images/luntic.jpg" 
-              alt="Лунтик" 
+              alt="Luntik" 
               style={{ 
                 width: '100%', 
                 maxWidth: '300px',
@@ -153,13 +168,12 @@ function About() {
               }} 
             />
             <p style={{ marginTop: '12px', color: '#666', fontSize: '18px' }}>
-              💎 Лунтик - наш самый строгий эксперт
+              💎 {language === 'en' ? "Luntik - our strictest expert" : "Лунтик - наш самый строгий эксперт"}
             </p>
           </div>
         </div>
       </div>
 
-      {/* БЛОК ОБРАЗОВАНИЯ */}
       <div style={{ marginTop: '40px', textAlign: 'center' }}>
         <a 
           href="/Наше образование.docx" 
@@ -189,7 +203,7 @@ function About() {
           }}
         >
           <span style={{ fontSize: '28px' }}>📥</span>
-          Скачать документ «Наше образование»
+          {language === 'en' ? "Download document «Our Education»" : "Скачать документ «Наше образование»"}
           <span style={{ fontSize: '24px' }}>🎓</span>
         </a>
       </div>

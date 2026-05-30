@@ -1,15 +1,15 @@
 import React from 'react';
 
-function TagCloud({ onTagClick }) {
+function TagCloud({ onTagClick, language }) {
   const tags = [
-    { name: 'Розы', value: 'розы', size: 5 },
-    { name: 'Хризантемы', value: 'хризантемы', size: 4 },
-    { name: 'Сирень', value: 'сирень', size: 3 },
-    { name: 'Цветочные корзинки', value: 'цветочные корзинки', size: 2 },
-    { name: 'Хиты продаж', value: 'хит продаж', size: 4 },
-    { name: 'Новинки', value: 'новинки', size: 3 },
-    { name: 'Распродажа', value: 'распродажа', size: 5 },
-  ]
+    { ru: ' Розы', en: ' Roses', value: 'розы', size: 5 },
+    { ru: ' Хризантемы', en: ' Chrysanthemums', value: 'хризантемы', size: 4 },
+    { ru: ' Сирень', en: ' Lilac', value: 'сирень', size: 3 },
+    { ru: ' Цветочные корзинки', en: ' Flower Baskets', value: 'цветочные корзинки', size: 2 },
+    { ru: ' Хиты продаж', en: ' Bestsellers', value: 'хит продаж', size: 4 },
+    { ru: ' Новинки', en: ' New', value: 'новинки', size: 3 },
+    { ru: ' Распродажа', en: ' Sale', value: 'распродажа', size: 5 },
+  ];
 
   const handleTagClick = (tagValue) => {
     onTagClick(tagValue);
@@ -17,7 +17,7 @@ function TagCloud({ onTagClick }) {
 
   return (
     <div className="tag-cloud">
-      <h3>🏷️ Навигация</h3>
+      <h3>{language === 'en' ? '🏷️ Navigation' : '🏷️ Навигация'}</h3>
       <div className="tags">
         {tags.map((tag, index) => (
           <span 
@@ -26,7 +26,7 @@ function TagCloud({ onTagClick }) {
             onClick={() => handleTagClick(tag.value)}
             style={{ cursor: 'pointer' }}
           >
-            {tag.name}
+            {language === 'en' ? tag.en : tag.ru}
           </span>
         ))}
       </div>

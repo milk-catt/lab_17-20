@@ -1,32 +1,37 @@
-// src/pages/Cart.jsx
 import React, { useState } from 'react';
 
-function Cart({ cartItems, removeFromCart, clearCart, clearCartSilently }) {
+function Cart({ cartItems, removeFromCart, clearCart, clearCartSilently, language }) {
   const [showPhoneModal, setShowPhoneModal] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [orderPlaced, setOrderPlaced] = useState(false);
 
   const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
 
+  const getProductName = (product) => {
+    if (typeof product.name === 'object') {
+      return product.name[language] || product.name.ru;
+    }
+    return product.name;
+  };
+
   const handleCheckout = () => {
     if (cartItems.length === 0) {
-      alert('Корзина пуста! Добавьте товары для оформления заказа.');
+      alert(language === 'en' ? 'Cart is empty! Add items to checkout.' : 'Корзина пуста! Добавьте товары для оформления заказа.');
       return;
     }
     setShowPhoneModal(true);
   };
 
   const confirmOrder = () => {
-  if (!phoneNumber || phoneNumber.length < 10) {
-    alert('Пожалуйста, укажите корректный номер телефона');
-    return;
-  }
-  
-  setShowPhoneModal(false);
-  clearCartSilently();  // ← ТЕПЕРЬ БЕЗ ПОДТВЕРЖДЕНИЯ
-  setOrderPlaced(true);
-  
-};
+    if (!phoneNumber || phoneNumber.length < 10) {
+      alert(language === 'en' ? 'Please enter a valid phone number' : 'Пожалуйста, укажите корректный номер телефона');
+      return;
+    }
+    setShowPhoneModal(false);
+    clearCartSilently(); 
+    setOrderPlaced(true);
+  };
+
   const backToCart = () => {
     setOrderPlaced(false);
     setPhoneNumber('');
@@ -199,13 +204,17 @@ function Cart({ cartItems, removeFromCart, clearCart, clearCartSilently }) {
     return (
       <div style={containerStyle}>
         <div style={thankYouStyle}>
-          <div style={thankYouTitleStyle}>🌸 Спасибо за заказ!</div>
+          <div style={thankYouTitleStyle}>
+            {language === 'en' ? '🌸 Thank you for your order!' : '🌸 Спасибо за заказ!'}
+          </div>
           <div style={thankYouTextStyle}>
-            Продавец свяжется с вами для уточнения деталей по номеру:<br />
+            {language === 'en' 
+              ? 'The seller will contact you to clarify the details at the number:' 
+              : 'Продавец свяжется с вами для уточнения деталей по номеру:'}<br />
             <strong style={{ fontSize: '1.3rem', color: '#e91e63' }}>{phoneNumber}</strong>
           </div>
           <button onClick={backToCart} style={backButtonStyle}>
-            🛍️ Вернуться в каталог
+            🛍️ {language === 'en' ? 'Back to catalog' : 'Вернуться в каталог'}
           </button>
         </div>
       </div>
@@ -215,9 +224,9 @@ function Cart({ cartItems, removeFromCart, clearCart, clearCartSilently }) {
   if (cartItems.length === 0) {
     return (
       <div style={containerStyle}>
-        <h1 style={titleStyle}>🛒 Корзина пуста</h1>
+        <h1 style={titleStyle}>🛒 {language === 'en' ? 'Cart is empty' : 'Корзина пуста'}</h1>
         <p style={{ textAlign: 'center', fontSize: '1.2rem', color: '#888' }}>
-          Добавьте цветы, чтобы сделать заказ
+          {language === 'en' ? 'Add flowers to make an order' : 'Добавьте цветы, чтобы сделать заказ'}
         </p>
       </div>
     );
@@ -225,12 +234,12 @@ function Cart({ cartItems, removeFromCart, clearCart, clearCartSilently }) {
 
   return (
     <div style={containerStyle}>
-      <h1 style={titleStyle}>🌸 Ваша корзина</h1>
+      <h1 style={titleStyle}>🌸 {language === 'en' ? 'Your cart' : 'Ваша корзина'}</h1>
       
       {cartItems.map((item, index) => (
         <div key={index} style={cartItemStyle}>
           <div>
-            <strong>{item.name}</strong>
+            <strong>{getProductName(item)}</strong>
             <br />
             <span style={{ color: '#e91e63', fontSize: '1.1rem' }}>{item.price} ₽</span>
           </div>
@@ -238,29 +247,31 @@ function Cart({ cartItems, removeFromCart, clearCart, clearCartSilently }) {
             onClick={() => removeFromCart(item.id)}
             style={removeButtonStyle}
           >
-            ✖ Удалить
+            ✖ {language === 'en' ? 'Remove' : 'Удалить'}
           </button>
         </div>
       ))}
       
       <div style={totalStyle}>
-        <span>Итого: </span>
+        <span>{language === 'en' ? 'Total' : 'Итого'}: </span>
         <span style={{ color: '#e91e63' }}>{totalPrice} ₽</span>
       </div>
       
       <div style={buttonGroupStyle}>
         <button onClick={clearCart} style={clearButtonStyle}>
-          🗑 Очистить корзину
+          🗑 {language === 'en' ? 'Clear cart' : 'Очистить корзину'}
         </button>
         <button onClick={handleCheckout} style={checkoutButtonStyle}>
-          💐 Оформить заказ
+          💐 {language === 'en' ? 'Checkout' : 'Оформить заказ'}
         </button>
       </div>
 
       {showPhoneModal && (
         <div style={modalOverlayStyle} onClick={() => setShowPhoneModal(false)}>
           <div style={modalStyle} onClick={(e) => e.stopPropagation()}>
-            <h3 style={modalTitleStyle}>📞 Укажите свой контактный телефон</h3>
+            <h3 style={modalTitleStyle}>
+              📞 {language === 'en' ? 'Enter your contact phone number' : 'Укажите свой контактный телефон'}
+            </h3>
             <input
               type="tel"
               placeholder="+7 (XXX) XXX-XX-XX"
@@ -270,10 +281,10 @@ function Cart({ cartItems, removeFromCart, clearCart, clearCartSilently }) {
               autoFocus
             />
             <button onClick={confirmOrder} style={modalButtonStyle}>
-              ✅ Подтвердить заказ
+              ✅ {language === 'en' ? 'Confirm order' : 'Подтвердить заказ'}
             </button>
             <button onClick={() => setShowPhoneModal(false)} style={cancelButtonStyle}>
-              ❌ Отмена
+              ❌ {language === 'en' ? 'Cancel' : 'Отмена'}
             </button>
           </div>
         </div>

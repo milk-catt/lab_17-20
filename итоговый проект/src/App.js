@@ -7,43 +7,45 @@ import FeedBack from './pages/FeedBack';
 import Catalog from './pages/Catalog';
 import Cart from './pages/Cart';
 import './style.css';
+import { translations } from './translations';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+
 
 function App() {
   const [currentPage, setCurrentPage] = useState('new');
   const [cart, setCart] = useState([]);
   const [selectedTag, setSelectedTag] = useState(null);
+  const [language, setLanguage] = useState('ru');
+
+  const t = translations[language];
 
   const addToCart = (product) => {
-    const isAlreadyInCart = cart.some(item => item.id === product.id);
-    
-    if (isAlreadyInCart) {
-      const newCart = cart.filter(item => item.id !== product.id);
-      setCart(newCart);
-      alert(`🗑️ ${product.name} удалён из корзины!`);
-    } else {
-      setCart([...cart, product]);
-      alert(`🌸 ${product.name} добавлен в корзину!`);
-    }
+    setCart([...cart, product]);
+    alert(`🌸 ${typeof product.name === 'object' ? product.name.ru : product.name} добавлен в корзину! / added to cart!`);
   };
 
   const removeFromCart = (id) => {
-    const product = cart.find(item => item.id === id);
-    
-    if (window.confirm(`❓ Вы уверены, что хотите удалить "${product?.name}" из корзины?`)) {
-      const newCart = cart.filter(item => item.id !== id);
+  const product = cart.find(item => item.id === id);
+  const productName = typeof product?.name === 'object' ? product.name[language] : product?.name;
+  
+  if (window.confirm(language === 'ru' 
+    ? `Удалить "${productName}" из корзины?` 
+    : `Remove "${productName}" from cart?`)) {
+    const index = cart.findIndex(item => item.id === id);
+    if (index !== -1) {
+      const newCart = [...cart];
+      newCart.splice(index, 1);
       setCart(newCart);
-      alert(`🗑️ ${product?.name} удалён из корзины!`);
     }
-  };
+  }
+};
 
-  // Очистка корзины С ПОДТВЕРЖДЕНИЕМ (для кнопки "Очистить корзину")
   const clearCart = () => {
-    if (window.confirm('Очистить корзину?')) {
+    if (window.confirm(language === 'ru' ? 'Очистить корзину?' : 'Clear cart?')) {
       setCart([]);
     }
   };
 
-  // Очистка корзины БЕЗ ПОДТВЕРЖДЕНИЯ (для оформления заказа)
   const clearCartSilently = () => {
     setCart([]);
   };
@@ -58,80 +60,110 @@ function App() {
     setCurrentPage('catalog');
   };
 
+  const toggleLanguage = () => {
+    setLanguage(language === 'ru' ? 'en' : 'ru');
+  };
+
   const renderArticle = () => {
     switch(currentPage) {
       case 'new':
-        return <New />;
+        return <New 
+        t={t} 
+        language={language} 
+      />;
       case 'about':
-        return <About />;
+        return <About 
+         t={t} 
+         language={language}
+        />;
       case 'feedback':
-        return <FeedBack />;
+        return <FeedBack 
+        t={t} 
+        language={language} 
+      />;
       case 'catalog':
         return <Catalog 
-          addToCart={addToCart} 
-          selectedTag={selectedTag}
-          cartItems={cart}
-        />;
+        addToCart={addToCart} 
+        selectedTag={selectedTag} 
+        removeFromCart={removeFromCart} 
+        cartItems={cart} t={t} 
+        language={language} 
+      />;
       case 'cart':
         return <Cart 
           cartItems={cart} 
           removeFromCart={removeFromCart} 
           clearCart={clearCart}
           clearCartSilently={clearCartSilently}
+          language={language}
         />;
       default:
-        return <New />;
+        return <New t={t} language={language} />;
     }
   };
 
   return (
-    <div className="app">
-      <header className="header">
-        <div className="logo">
-          <div className="logo-text" style={{ 
-            fontSize: '2.5rem', 
-            fontWeight: 'bold',
-            fontFamily: "'Playfair Display', 'Segoe UI', 'Georgia', serif",
-            letterSpacing: '2px',
-            color: '#8B0000'
-          }}>
-            Бонсай 🌸 BONSSAI
+    <BrowserRouter>
+      <div className="app">
+        <header className="header">
+          <div className="logo">
+            <div className="logo-text" style={{ 
+              fontSize: '2.5rem', 
+              fontWeight: 'bold',
+              fontFamily: "'Playfair Display', 'Segoe UI', 'Georgia', serif",
+              letterSpacing: '2px',
+              color: '#8B0000'
+            }}>
+              {t.logo}
+            </div>
+            <div className="logo-sub" style={{ 
+              fontSize: '1.2rem', 
+              fontFamily: "'Montserrat', 'Segoe UI', sans-serif",
+              fontStyle: 'italic',
+              letterSpacing: '1px',
+              marginTop: '8px',
+              color: '#680141'
+            }}>
+              {t.logoSub}
+            </div>
           </div>
-          <div className="logo-sub" style={{ 
-            fontSize: '1.2rem', 
-            fontFamily: "'Montserrat', 'Segoe UI', sans-serif",
-            fontStyle: 'italic',
-            letterSpacing: '1px',
-            marginTop: '8px',
-            color: '#680141'
-          }}>
-            Скажи «люблю» без единого слова
+          
+          <div className="language-switcher">
+            <button 
+              onClick={toggleLanguage}
+              style={{
+                backgroundColor: language === 'ru' ? '#f57ed3' : '#e1bef7',
+                color: language === 'ru' ? 'white' : '#680141',
+                border: 'none',
+                padding: '8px 16px',
+                borderRadius: '25px',
+                cursor: 'pointer',
+                fontSize: '0.9rem',
+                fontWeight: 'bold',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              {language === 'ru' ? '🇷🇺 RU' : '🇬🇧 EN'}
+            </button>
           </div>
+        </header>
+
+        <div className="main-container">
+          <Section changePage={setCurrentPage} currentPage={currentPage} onClearTag={clearTag} t={t} language={language} />
+          <article className="article">
+            {renderArticle()}
+          </article>
+          <Aside onTagClick={filterByTag} t={t} language={language} />
         </div>
-      </header>
 
-      <div className="main-container">
-        <Section 
-          changePage={setCurrentPage} 
-          currentPage={currentPage}
-          onClearTag={clearTag}
-        />
-        <article className="article">
-          {renderArticle()}
-        </article>
-        <Aside onTagClick={filterByTag} />
+        <footer className="footer">
+          <p>📞 {t.phone}</p>
+          <p>📧 aleolei@sfedu.ru | chekrizova@sfedu.ru</p>
+          <p>{t.address}</p>
+          <p>{t.copyright}</p>
+        </footer>
       </div>
-
-      <footer className="footer">
-        <p>
-          📞 <a href="tel:88005553535">8-(800)-555-35-35  </a> 
-           📧 <a href="mailto:chekrizova@sfedu.ru">chekrizova@sfedu.ru </a>
-          |<a href="mailto:aleolei@sfedu.ru"> aleolei@sfedu.ru</a>
-        </p>
-        <p>📍 пгт. Яблоновский, ул. Гагарина, 114.</p>
-        <p>© 2026 Все права защищены</p>
-      </footer>
-    </div>
+    </BrowserRouter>
   );
 }
 

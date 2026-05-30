@@ -1,17 +1,17 @@
 import React from 'react';
 
-function Section({ changePage, currentPage, onClearTag }) {  // ← добавить onClearTag
+function Section({ changePage, currentPage, onClearTag, t }) {
   const menuItems = [
-    { id: 'new', name: '📰 Новости' },
-    { id: 'about', name: '👤 О магазине' },
-    { id: 'feedback', name: '📞 Обратная связь' },
-    { id: 'catalog', name: '💐 Каталог товаров' },
-    { id: 'cart', name: '🛒 Корзина' }
+    { id: 'new', name: `📰 ${t.news}` },
+    { id: 'about', name: `👤 ${t.about}` },
+    { id: 'feedback', name: `📞 ${t.contacts}` },
+    { id: 'catalog', name: `💐 ${t.catalog}` },
+    { id: 'cart', name: `🛒 ${t.cart}` }
   ];
 
   const handlePageChange = (pageId) => {
     if (pageId === 'catalog') {
-      onClearTag();  // ← сбрасываем тег при переходе в каталог
+      onClearTag();
     }
     changePage(pageId);
   };
@@ -19,7 +19,7 @@ function Section({ changePage, currentPage, onClearTag }) {  // ← добави
   return (
     <div className="section">
       <div className="nav-menu">
-        <h3>Главное меню</h3>
+        <h3>{t.navigation}</h3>
         <ul>
           {menuItems.map(item => (
             <li key={item.id}>
@@ -35,10 +35,10 @@ function Section({ changePage, currentPage, onClearTag }) {  // ← добави
       </div>
 
       <div className="banners">
-        <h4>🎁 Акции</h4>
-        <div className="banner">Скидка 10% на первый заказ</div>
-        <div className="banner">Бесплатная доставка от 3000₽</div>
-        <div className="banner">Открытки с любовью к каждому букету</div>
+        <h4>{t.promotions}</h4>
+        <div className="banner">{t.promo1}</div>
+        <div className="banner">{t.promo2}</div>
+        <div className="banner">{t.promo3}</div>
       </div>
     </div>
   );
