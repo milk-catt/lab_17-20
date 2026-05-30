@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
-function Cart({ cartItems, removeFromCart, clearCart, clearCartSilently, language }) {
+
+
+function Cart({ cartItems, removeFromCart, clearCart, clearCartSilently, language, onBackToCatalog }) {
   const [showPhoneModal, setShowPhoneModal] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [orderPlaced, setOrderPlaced] = useState(false);
@@ -32,9 +34,12 @@ function Cart({ cartItems, removeFromCart, clearCart, clearCartSilently, languag
     setOrderPlaced(true);
   };
 
-  const backToCart = () => {
+  const backToCatalog = () => {
     setOrderPlaced(false);
     setPhoneNumber('');
+    if (onBackToCatalog) {
+      onBackToCatalog(); 
+    }
   };
 
   const containerStyle = {
@@ -213,7 +218,7 @@ function Cart({ cartItems, removeFromCart, clearCart, clearCartSilently, languag
               : 'Продавец свяжется с вами для уточнения деталей по номеру:'}<br />
             <strong style={{ fontSize: '1.3rem', color: '#e91e63' }}>{phoneNumber}</strong>
           </div>
-          <button onClick={backToCart} style={backButtonStyle}>
+          <button onClick={backToCatalog} style={backButtonStyle}>
             🛍️ {language === 'en' ? 'Back to catalog' : 'Вернуться в каталог'}
           </button>
         </div>

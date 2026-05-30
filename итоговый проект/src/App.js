@@ -10,39 +10,54 @@ import './style.css';
 import { translations } from './translations';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
-
 function App() {
   const [currentPage, setCurrentPage] = useState('new');
   const [cart, setCart] = useState([]);
   const [selectedTag, setSelectedTag] = useState(null);
   const [language, setLanguage] = useState('ru');
+  const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
 
   const t = translations[language];
 
+  const showToast = (message, type = 'success') => {
+    setToast({ show: true, message, type });
+    setTimeout(() => setToast({ show: false, message: '', type: 'success' }), 2500);
+  };
+
   const addToCart = (product) => {
     setCart([...cart, product]);
-    alert(`🌸 ${typeof product.name === 'object' ? product.name.ru : product.name} добавлен в корзину! / added to cart!`);
+    const productName = typeof product.name === 'object' ? product.name.ru : product.name;
+    const message = language === 'ru' 
+      ? `🌸 ${productName} добавлен в корзину!` 
+      : `🌸 ${productName} added to cart!`;
+    showToast(message, 'success');
   };
 
   const removeFromCart = (id) => {
-  const product = cart.find(item => item.id === id);
-  const productName = typeof product?.name === 'object' ? product.name[language] : product?.name;
-  
-  if (window.confirm(language === 'ru' 
-    ? `Удалить "${productName}" из корзины?` 
-    : `Remove "${productName}" from cart?`)) {
-    const index = cart.findIndex(item => item.id === id);
-    if (index !== -1) {
-      const newCart = [...cart];
-      newCart.splice(index, 1);
-      setCart(newCart);
+    const product = cart.find(item => item.id === id);
+    const productName = typeof product?.name === 'object' ? product.name[language] : product?.name;
+    
+    if (window.confirm(language === 'ru' 
+      ? `Удалить "${productName}" из корзины?` 
+      : `Remove "${productName}" from cart?`)) {
+      const index = cart.findIndex(item => item.id === id);
+      if (index !== -1) {
+        const newCart = [...cart];
+        newCart.splice(index, 1);
+        setCart(newCart);
+        const message = language === 'ru' 
+          ? `🗑️ ${productName} удалён из корзины` 
+          : `🗑️ ${productName} removed from cart`;
+        showToast(message, 'remove');
+      }
     }
-  }
-};
+  };
 
   const clearCart = () => {
     if (window.confirm(language === 'ru' ? 'Очистить корзину?' : 'Clear cart?')) {
       setCart([]);
+      const message = language === 'ru' ? '🗑️ Корзина очищена' : '🗑️ Cart cleared';
+      showToast(message, 'remove');
     }
   };
 
@@ -64,31 +79,28 @@ function App() {
     setLanguage(language === 'ru' ? 'en' : 'ru');
   };
 
+  const goToCatalog = () => {
+    setCurrentPage('catalog');
+    clearTag(); 
+  };
+
   const renderArticle = () => {
     switch(currentPage) {
       case 'new':
-        return <New 
-        t={t} 
-        language={language} 
-      />;
+        return <New t={t} language={language} />;
       case 'about':
-        return <About 
-         t={t} 
-         language={language}
-        />;
+        return <About t={t} language={language} />;
       case 'feedback':
-        return <FeedBack 
-        t={t} 
-        language={language} 
-      />;
+        return <FeedBack t={t} language={language} />;
       case 'catalog':
         return <Catalog 
-        addToCart={addToCart} 
-        selectedTag={selectedTag} 
-        removeFromCart={removeFromCart} 
-        cartItems={cart} t={t} 
-        language={language} 
-      />;
+          addToCart={addToCart} 
+          removeFromCart={removeFromCart}
+          selectedTag={selectedTag} 
+          cartItems={cart} 
+          t={t} 
+          language={language} 
+        />;
       case 'cart':
         return <Cart 
           cartItems={cart} 
@@ -96,6 +108,7 @@ function App() {
           clearCart={clearCart}
           clearCartSilently={clearCartSilently}
           language={language}
+          onBackToCatalog={goToCatalog}
         />;
       default:
         return <New t={t} language={language} />;
@@ -149,11 +162,21 @@ function App() {
         </header>
 
         <div className="main-container">
-          <Section changePage={setCurrentPage} currentPage={currentPage} onClearTag={clearTag} t={t} language={language} />
+          <Section 
+          changePage={setCurrentPage} 
+          currentPage={currentPage} 
+          onClearTag={clearTag} 
+          t={t} 
+          language={language} 
+          />
           <article className="article">
             {renderArticle()}
           </article>
-          <Aside onTagClick={filterByTag} t={t} language={language} />
+          <Aside 
+          onTagClick={filterByTag} 
+          t={t} 
+          language={language} 
+          />
         </div>
 
         <footer className="footer">
@@ -162,7 +185,39 @@ function App() {
           <p>{t.address}</p>
           <p>{t.copyright}</p>
         </footer>
+
+        {toast.show && (
+          <div style={{
+            position: 'fixed',
+            bottom: '30px',
+            right: '30px',
+            backgroundColor: toast.type === 'remove' ? '#ff6b6b' : '#4caf50',
+            color: 'white',
+            padding: '14px 28px',
+            borderRadius: '50px',
+            fontSize: '1rem',
+            fontWeight: 'bold',
+            boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+            zIndex: 10000,
+            animation: 'slideIn 0.3s ease'
+          }}>
+            {toast.message}
+          </div>
+        )}
       </div>
+
+      <style>{`
+        @keyframes slideIn {
+          from {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+      `}</style>
     </BrowserRouter>
   );
 }

@@ -1,10 +1,14 @@
 import React from 'react';
 import TagCloud from './TagCloud';
 
-function Aside({ onTagClick, t, language }) {  // ← ДОБАВИТЬ language
+function Aside({ onTagClick, t, language }) { 
   return (
     <div className="aside">
-      <TagCloud onTagClick={onTagClick} t={t} language={language} />  {/* ← ДОБАВИТЬ language */}
+      <TagCloud 
+      onTagClick={onTagClick} 
+      t={t} 
+      language={language} 
+      /> 
       <div className="aside-banners">
         <div className="aside-banner">{t.subscribe}</div>
         <div className="aside-banner">{t.cards}</div>

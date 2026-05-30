@@ -59,7 +59,6 @@ function ProductCard({ product, onAddToCart, onRemoveFromCart, isInCart, t, lang
     alignSelf: 'flex-end'
   };
 
-  // Функция для получения текста в зависимости от языка
   const getText = (field) => {
     if (!field) return '';
     if (typeof field === 'object') {
